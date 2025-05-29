@@ -200,9 +200,16 @@ namespace cli
 				T result;
 				try
 				{
-					// Use default
-					if(!required && arguments.empty())
-						return true;
+                    // Use default
+                    if (!required && arguments.empty())
+                    {
+                        // Always parse even if no arguments — especially important for bool flags
+                        if constexpr (std::is_same<T, bool>::value)
+                            value = Parser::parse(arguments, value);
+                            
+                        // Non-required and no arguments — skip parsing
+                        return true;
+                    }
 
 					value = Parser::parse(arguments, value);
 					return true;
