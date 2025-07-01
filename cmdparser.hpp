@@ -69,9 +69,9 @@ namespace cli
 					description(description),
 					required(required),
 					handled(false),
-					arguments({}),
 					dominant(dominant),
-					variadic(variadic)
+					variadic(variadic),
+					arguments({})
 			{
 			}
 
@@ -150,7 +150,7 @@ namespace cli
 			{
 			}
 
-			virtual bool parse(std::ostream& output, std::ostream& error)
+			virtual bool parse(std::ostream& output, std::ostream& error) override
 			{
 				try
 				{
@@ -174,10 +174,12 @@ namespace cli
 
 			virtual bool validate(std::ostream& output, std::ostream& error) override
 			{
+                (void)output;
+                (void)error;
 				return true;
 			}
 
-			virtual std::string print_value() const
+			virtual std::string print_value() const override
 			{
 				return "";
 			}
@@ -195,9 +197,9 @@ namespace cli
 			{
 			}
 
-			virtual bool parse(std::ostream& output, std::ostream& error)
+			virtual bool parse(std::ostream& output, std::ostream& error) override
 			{
-				T result;
+                (void)output;
 				try
 				{
                     // Use default
@@ -245,7 +247,7 @@ namespace cli
 				return true;
 			}
 
-			virtual std::string print_value() const
+			virtual std::string print_value() const override
 			{
 				return stringify(value);
 			}
