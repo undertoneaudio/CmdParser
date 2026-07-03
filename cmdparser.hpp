@@ -268,10 +268,12 @@ namespace cli
 
 		static bool parse(const std::vector<std::string>& elements, const bool& defval)
 		{
-			if (elements.size() != 0)
-				throw std::runtime_error("A boolean command line parameter cannot have any arguments.");
+			(void)defval;
 
-			return !defval;
+			if (elements.empty())
+				return true;
+
+			throw std::runtime_error("A boolean command line parameter cannot have any arguments.");
 		}
 
 		static double parse(const std::vector<std::string>& elements, const double&)
